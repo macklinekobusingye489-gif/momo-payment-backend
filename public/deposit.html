@@ -371,6 +371,62 @@
     <!-- Payment CTA Button -->
     <button class="submit-btn">Send Payment Prompt</button>
 </div>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    // Select form elements (adjust selectors if your HTML uses different IDs/classes)
+    const amountInput = document.querySelector('input[type="number"]') || document.querySelector('.text-input');
+    const phoneInput = document.querySelectorAll('input')[1] || document.querySelectorAll('.text-input')[1];
+    const submitBtn = document.querySelector('button[type="submit"]') || document.querySelector('.submit-btn');
 
+    if (!submitBtn) return;
+
+    submitBtn.addEventListener('click', async (e) => {
+        e.preventDefault();
+
+        const amount = amountInput ? amountInput.value.trim() : '';
+        const phone = phoneInput ? phoneInput.value.trim() : '';
+
+        // Basic validation
+        if (!amount || amount <= 0) {
+            alert('Please enter a valid deposit amount.');
+            return;
+        }
+
+        if (!phone) {
+            alert('Please enter a valid phone number (e.g., 256770000000).');
+            return;
+        }
+
+        // Show loading state
+        submitBtn.disabled = true;
+        const originalText = submitBtn.textContent;
+        submitBtn.textContent = 'Sending payment prompt...';
+
+        try {
+            const response = await fetch('/api/deposit', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ amount, phone })
+            });
+
+            const data = await response.json();
+
+            if (response.ok && data.success) {
+                alert('Payment prompt sent! Please enter your Mobile Money PIN on your phone to complete the deposit.');
+            } else {
+                alert('Error: ' + (data.error || 'Failed to initiate payment prompt.'));
+            }
+        } catch (error) {
+            console.error('Deposit Error:', error);
+            alert('Network error. Please check your connection and try again.');
+        } finally {
+            submitBtn.disabled = false;
+            submitBtn.textContent = originalText;
+        }
+    });
+});
+</script>
 </body>
 </html>
