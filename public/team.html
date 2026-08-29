@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Team & Commission Page</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        html, body {
+            width: 100%;
+            background-color: #F8ECE3;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            min-height: 100vh;
+            padding-bottom: 100px;
+        }
+
+        .phone-container {
+            width: 100%;
+            max-width: 410px;
+            background: linear-gradient(180deg, #F9ECE3 0%, #F5DFD0 100%);
+            padding: 20px 16px;
+            min-height: 100vh;
+            position: relative;
+        }
+
+        /* Top Metrics Row */
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        .metric-card {
+            background: #EEDCCE;
+            border-radius: 18px;
+            padding: 20px 12px;
+            text-align: center;
+        }
+
+        .metric-value-orange {
+            font-size: 26px;
+            font-weight: 800;
+            color: #E65100;
+            margin-bottom: 6px;
+        }
+
+        .metric-value-green {
+            font-size: 26px;
+            font-weight: 800;
+            color: #2E7D32;
+            margin-bottom: 6px;
+        }
+
+        .metric-label {
+            font-size: 13px;
+            color: #8C7A6B;
+        }
+
+        /* Referral Card */
+        .referral-card {
+            background: #EEDCCE;
+            border-radius: 20px;
+            overflow: hidden;
+            margin-bottom: 24px;
+        }
+
+        .referral-header {
+            background: linear-gradient(90deg, #E65100 0%, #F57C00 100%);
+            color: #FFFFFF;
+            padding: 14px 16px;
+            font-size: 16px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .referral-body {
+            padding: 16px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .ref-row {
+            display: flex;
+            gap: 10px;
+        }
+
+        .ref-input {
+            flex-grow: 1;
+            background: #F8ECE3;
+            border: none;
+            border-radius: 12px;
+            padding: 12px 14px;
+            font-size: 13px;
+            color: #555555;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .ref-code-input {
+            flex-grow: 1;
+            background: #F8ECE3;
+            border: none;
+            border-radius: 12px;
+            padding: 12px 14px;
+            font-size: 16px;
+            font-weight: 800;
+            color: #1F1F1F;
+            text-align: center;
+            letter-spacing: 4px;
+        }
+
+        .btn-action-fill {
+            background: linear-gradient(135deg, #E65100 0%, #F57C00 100%);
+            color: #FFFFFF;
+            border: none;
+            border-radius: 12px;
+            padding: 12px 24px;
+            font-size: 14px;
+            font-weight: 700;
+            cursor: pointer;
+        }
+
+        .btn-action-outline {
+            background: transparent;
+            color: #E65100;
+            border: 1px solid #E65100;
+            border-radius: 12px;
+            padding: 12px 24px;
+            font-size: 14px;
+            font-weight: 700;
+            cursor: pointer;
+        }
+
+        /* Section Title */
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 14px;
+            font-weight: 800;
+            color: #7A685A;
+            letter-spacing: 0.5px;
+            margin-bottom: 16px;
+            text-transform: uppercase;
+        }
+
+        .title-pill {
+            width: 6px;
+            height: 16px;
+            background-color: #E65100;
+            border-radius: 4px;
+        }
+
+        /* Commission Level Cards */
+        .level-card {
+            background: #EEDCCE;
+            border-radius: 20px;
+            padding: 16px;
+            margin-bottom: 14px;
+        }
+
+        .level-top-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding-bottom: 14px;
+            border-bottom: 1px solid rgba(140, 122, 107, 0.15);
+            margin-bottom: 14px;
+        }
+
+        .level-title-group {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .icon-box {
+            width: 44px;
+            height: 44px;
+            background: linear-gradient(135deg, #E65100 0%, #F57C00 100%);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #FFFFFF;
+        }
+
+        .level-name {
+            font-size: 16px;
+            font-weight: 700;
+            color: #1F1F1F;
+        }
+
+        .level-rate {
+            font-size: 15px;
+            font-weight: 700;
+            color: #E65100;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .level-stats-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            text-align: center;
+        }
+
+        .stat-val-orange {
+            font-size: 18px;
+            font-weight: 800;
+            color: #E65100;
+            margin-bottom: 4px;
+        }
+
+        .stat-val-green {
+            font-size: 18px;
+            font-weight: 800;
+            color: #2E7D32;
+            margin-bottom: 4px;
+        }
+
+        .stat-lbl {
+            font-size: 12px;
+            color: #7A685A;
+        }
+
+        /* Floating Bottom Nav */
+        .bottom-nav-container {
+            position: fixed;
+            bottom: 16px;
+            left: 16px;
+            right: 16px;
+            display: flex;
+            justify-content: center;
+            z-index: 1000;
+        }
+
+        .bottom-nav {
+            width: 100%;
+            max-width: 420px;
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(20px);
+            border-radius: 35px;
+            padding: 8px 12px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            flex: 1;
+            text-decoration: none;
+            color: #6D584C;
+            font-size: 11px;
+            font-weight: 600;
+            gap: 3px;
+        }
+
+        .nav-item svg {
+            width: 22px;
+            height: 22px;
+            stroke: #6D584C;
+            stroke-width: 2;
+            fill: none;
+        }
+
+        .nav-item.active {
+            background: linear-gradient(135deg, #E65100, #F57C00);
+            color: #FFFFFF;
+            border-radius: 25px;
+            padding: 8px 16px;
+            flex: 1.2;
+            flex-direction: row;
+            gap: 8px;
+        }
+
+        .nav-item.active svg {
+            stroke: #FFFFFF;
+        }
+
+        .nav-item.active span {
+            font-size: 13px;
+            font-weight: 700;
+        }
+    </style>
+</head>
+<body>
+
+<div class="phone-container">
+
+    <!-- Top Metrics -->
+    <div class="metrics-grid">
+        <div class="metric-card">
+            <div class="metric-value-orange">0</div>
+            <div class="metric-label">Total members</div>
+        </div>
+        <div class="metric-card">
+            <div class="metric-value-green">UGX 0</div>
+            <div class="metric-label">Total commission</div>
+        </div>
+    </div>
+
+    <!-- Your Referral Link -->
+    <div class="referral-card">
+        <div class="referral-header">
+            <svg style="stroke:#fff; width:18px; height:18px; fill:none; stroke-width:2;" viewBox="0 0 24 24"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg>
+            Your referral link
+        </div>
+        <div class="referral-body">
+            <div class="ref-row">
+                <div class="ref-input">https://finedgeus.online/auth...</div>
+                <button class="btn-action-fill">Copy</button>
+            </div>
+            <div class="ref-row">
+                <div class="ref-code-input">1 4 3 4 4</div>
+                <button class="btn-action-outline">Code</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Section Title -->
+    <div class="section-header">
+        <div class="title-pill"></div>
+        <span>Commission Levels</span>
+    </div>
+
+    <!-- First Level -->
+    <div class="level-card">
+        <div class="level-top-row">
+            <div class="level-title-group">
+                <div class="icon-box">
+                    <svg style="stroke:#fff; width:22px; height:22px; fill:none; stroke-width:2;" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+                </div>
+                <span class="level-name">First Level</span>
+            </div>
+            <div class="level-rate">15% &rsaquo;</div>
+        </div>
+        <div class="level-stats-row">
+            <div>
+                <div class="stat-val-orange">0</div>
+                <div class="stat-lbl">Members</div>
+            </div>
+            <div>
+                <div class="stat-val-green">15%</div>
+                <div class="stat-lbl">Commission rate</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Second Level -->
+    <div class="level-card">
+        <div class="level-top-row">
+            <div class="level-title-group">
+                <div class="icon-box">
+                    <svg style="stroke:#fff; width:22px; height:22px; fill:none; stroke-width:2;" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+                </div>
+                <span class="level-name">Second Level</span>
+            </div>
+            <div class="level-rate">5% &rsaquo;</div>
+        </div>
+        <div class="level-stats-row">
+            <div>
+                <div class="stat-val-orange">0</div>
+                <div class="stat-lbl">Members</div>
+            </div>
+            <div>
+                <div class="stat-val-green">5%</div>
+                <div class="stat-lbl">Commission rate</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Third Level -->
+    <div class="level-card">
+        <div class="level-top-row">
+            <div class="level-title-group">
+                <div class="icon-box">
+                    <svg style="stroke:#fff; width:22px; height:22px; fill:none; stroke-width:2;" viewBox="0 0 24 24"><polygon points="12 2 2 7 12 12 22 7 12 2"></polygon><polyline points="2 17 12 22 22 17"></polyline><polyline points="2 12 12 17 22 12"></polyline></svg>
+                </div>
+                <span class="level-name">Third Level</span>
+            </div>
+            <div class="level-rate">1% &rsaquo;</div>
+        </div>
+        <div class="level-stats-row">
+            <div>
+                <div class="stat-val-orange">0</div>
+                <div class="stat-lbl">Members</div>
+            </div>
+            <div>
+                <div class="stat-val-green">1%</div>
+                <div class="stat-lbl">Commission rate</div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<!-- Floating Navigation Bar -->
+<div class="bottom-nav-container">
+    <div class="bottom-nav">
+        <a href="index.html" class="nav-item">
+            <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+            <span>Home</span>
+        </a>
+        <a href="plans.html" class="nav-item">
+            <svg viewBox="0 0 24 24"><polygon points="12 2 2 7 12 12 22 7 12 2"></polygon><polyline points="2 17 12 22 22 17"></polyline><polyline points="2 12 12 17 22 12"></polyline></svg>
+            <span>Plans</span>
+        </a>
+        <a href="team.html" class="nav-item active">
+            <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+            <span>Team</span>
+        </a>
+        <a href="profile.html" class="nav-item">
+            <svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+            <span>Profile</span>
+        </a>
+    </div>
+</div>
+
+</body>
+</html>

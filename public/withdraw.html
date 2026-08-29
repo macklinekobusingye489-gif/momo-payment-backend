@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Withdraw Page</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        }
+
+        html, body {
+            width: 100%;
+            min-height: 100vh;
+            background-color: #FFF8F5;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            padding: 0;
+        }
+
+        .phone-container {
+            width: 100%;
+            max-width: 410px;
+            background-color: #FFF8F5;
+            padding: 0 16px 24px 16px;
+            min-height: 100vh;
+        }
+
+        /* Top Header Area */
+        .header-bg {
+            background: linear-gradient(135deg, #FF6600 0%, #FFA000 100%);
+            margin: 0 -16px 20px -16px;
+            padding: 20px 16px 40px 16px;
+            display: flex;
+            align-items: center;
+            position: relative;
+        }
+
+        .back-btn {
+            background: rgba(255, 255, 255, 0.3);
+            border: none;
+            width: 42px;
+            height: 42px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            color: #FFFFFF;
+            font-size: 20px;
+        }
+
+        .header-title {
+            flex-grow: 1;
+            text-align: center;
+            font-size: 20px;
+            font-weight: 700;
+            color: #FFFFFF;
+            margin-right: 42px;
+        }
+
+        /* Balance Section */
+        .balance-card {
+            background: #FFFFFF;
+            border-radius: 20px;
+            padding: 20px;
+            text-align: center;
+            margin-top: -35px;
+            margin-bottom: 16px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.04);
+        }
+
+        .balance-label {
+            font-size: 14px;
+            color: #666666;
+            margin-bottom: 6px;
+        }
+
+        .balance-amount {
+            font-size: 28px;
+            font-weight: 800;
+            color: #FF5500;
+        }
+
+        /* Withdrawal Account Card */
+        .account-card {
+            background: linear-gradient(135deg, #FF6600 0%, #FFA000 100%);
+            border-radius: 20px;
+            padding: 20px;
+            color: #FFFFFF;
+            margin-bottom: 16px;
+            box-shadow: 0 6px 18px rgba(255, 102, 0, 0.25);
+        }
+
+        .account-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+
+        .account-title {
+            font-size: 16px;
+            font-weight: 700;
+        }
+
+        .badge-savings {
+            background: rgba(255, 255, 255, 0.25);
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+        }
+
+        .account-status {
+            font-size: 22px;
+            font-weight: 600;
+            font-family: monospace;
+            margin-bottom: 16px;
+        }
+
+        .account-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+        }
+
+        .holder-label {
+            font-size: 12px;
+            opacity: 0.8;
+            margin-bottom: 4px;
+        }
+
+        .holder-value {
+            font-size: 16px;
+            font-weight: 700;
+        }
+
+        .edit-btn {
+            background: rgba(255, 255, 255, 0.25);
+            border: none;
+            padding: 8px 16px;
+            border-radius: 10px;
+            color: #FFFFFF;
+            font-size: 13px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            cursor: pointer;
+        }
+
+        /* Withdrawal Locked Card */
+        .locked-card {
+            background: #FFFFFF;
+            border: 1px solid #FFCDD2;
+            border-radius: 20px;
+            padding: 20px;
+            margin-bottom: 16px;
+        }
+
+        .locked-title {
+            color: #D32F2F;
+            font-size: 16px;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .locked-text {
+            font-size: 14px;
+            color: #666666;
+            line-height: 1.4;
+            margin-bottom: 16px;
+        }
+
+        .action-btn {
+            width: 100%;
+            background: linear-gradient(135deg, #FF6600 0%, #FFA000 100%);
+            color: white;
+            border: none;
+            padding: 16px;
+            border-radius: 14px;
+            font-size: 15px;
+            font-weight: 700;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(255, 102, 0, 0.25);
+        }
+
+        /* Withdrawal Request Card */
+        .request-card {
+            background: #FFFFFF;
+            border-radius: 20px;
+            padding: 20px;
+            margin-bottom: 16px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.02);
+        }
+
+        .section-header {
+            font-size: 16px;
+            font-weight: 700;
+            color: #1F1F1F;
+            margin-bottom: 16px;
+        }
+
+        .input-label {
+            font-size: 14px;
+            font-weight: 600;
+            color: #1F1F1F;
+            margin-bottom: 8px;
+            display: block;
+        }
+
+        .input-wrapper {
+            position: relative;
+            margin-bottom: 16px;
+        }
+
+        .input-icon {
+            position: absolute;
+            left: 14px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 16px;
+        }
+
+        .text-input {
+            width: 100%;
+            padding: 14px 14px 14px 44px;
+            background: #F5F5F5;
+            border: none;
+            border-radius: 12px;
+            font-size: 15px;
+            color: #1F1F1F;
+            outline: none;
+        }
+
+        .fee-details {
+            background: #FAFAFA;
+            border-radius: 12px;
+            padding: 12px 14px;
+            margin-bottom: 16px;
+            font-size: 13px;
+            color: #666666;
+        }
+
+        .fee-row {
+            display: flex;
+            gap: 6px;
+            margin-bottom: 4px;
+        }
+
+        .fee-row:last-child {
+            margin-bottom: 0;
+        }
+
+        .bold-text {
+            font-weight: 700;
+            color: #1F1F1F;
+        }
+
+        .orange-text {
+            font-weight: 700;
+            color: #FF5500;
+        }
+
+        .btn-disabled {
+            width: 100%;
+            background: linear-gradient(135deg, #FFC107 0%, #FFB74D 100%);
+            color: #FFFFFF;
+            border: none;
+            padding: 16px;
+            border-radius: 14px;
+            font-size: 15px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            cursor: not-allowed;
+        }
+
+        /* Rules Card */
+        .rules-card {
+            background: #FFFFFF;
+            border-radius: 20px;
+            padding: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.02);
+        }
+
+        .rules-list {
+            list-style: none;
+        }
+
+        .rules-list li {
+            font-size: 14px;
+            color: #1F1F1F;
+            margin-bottom: 10px;
+            position: relative;
+            padding-left: 14px;
+        }
+
+        .rules-list li::before {
+            content: "•";
+            position: absolute;
+            left: 0;
+            color: #1F1F1F;
+        }
+
+        .rules-list li:last-child {
+            margin-bottom: 0;
+        }
+    </style>
+</head>
+<body>
+
+<div class="phone-container">
+    <!-- Top Header -->
+    <div class="header-bg">
+        <button class="back-btn" onclick="history.back()">&larr;</button>
+        <span class="header-title">Withdraw</span>
+    </div>
+
+    <!-- Current Balance Block -->
+    <div class="balance-card">
+        <div class="balance-label">Current Balance</div>
+        <div class="balance-amount">UGX 5,000</div>
+    </div>
+
+    <!-- Withdrawal Account Banner -->
+    <div class="account-card">
+        <div class="account-header">
+            <span class="account-title">Withdrawal Account</span>
+            <span class="badge-savings">SAVINGS</span>
+        </div>
+        <div class="account-status">Not bound</div>
+        <div class="account-footer">
+            <div>
+                <div class="holder-label">Account Holder</div>
+                <div class="holder-value">—</div>
+            </div>
+            <button class="edit-btn">✏️ Edit</button>
+        </div>
+    </div>
+
+    <!-- Withdrawal Locked Notice -->
+    <div class="locked-card">
+        <div class="locked-title">Withdrawal locked</div>
+        <p class="locked-text">You need at least one active plan before you can withdraw. Activate a plan to unlock withdrawals.</p>
+        <button class="action-btn">View Plans</button>
+    </div>
+
+    <!-- Withdrawal Request Form -->
+    <div class="request-card">
+        <div class="section-header">Withdrawal Request</div>
+        <label class="input-label">Withdrawal Amount (UGX):</label>
+        
+        <div class="input-wrapper">
+            <span class="input-icon">💵</span>
+            <input type="text" class="text-input" placeholder="Enter amount in UGX">
+        </div>
+
+        <div class="fee-details">
+            <div class="fee-row">
+                <span>Fee (15%):</span>
+                <span class="bold-text">UGX 0</span>
+            </div>
+            <div class="fee-row">
+                <span>You receive:</span>
+                <span class="orange-text">UGX 0</span>
+            </div>
+        </div>
+
+        <button class="btn-disabled">✈️ Requires Active Plan</button>
+    </div>
+
+    <!-- Withdrawal Rules Block -->
+    <div class="rules-card">
+        <div class="section-header">Withdrawal Rules</div>
+        <ul class="rules-list">
+            <li>Minimum withdrawal: <strong>UGX 5,000</strong></li>
+            <li>Withdrawal fee: <strong>15%</strong></li>
+            <li>Processing time: <strong>10:00 AM - 4:00 PM</strong></li>
+            <li>Funds are sent to your bound account</li>
+        </ul>
+    </div>
+</div>
+
+</body>
+</html>

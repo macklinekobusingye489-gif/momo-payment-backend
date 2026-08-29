@@ -1,0 +1,815 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FinEdge - Home</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(180deg, #EAD7CD 0%, #D8B29C 50%, #CA9980 100%);
+            background-attachment: fixed;
+            min-height: 100vh;
+            padding: 20px 16px 100px 16px;
+            color: #332319;
+        }
+
+        /* Top Header */
+        .header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-top: 10px;
+            margin-bottom: 20px;
+        }
+
+        .brand-container {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo-box {
+            width: 48px;
+            height: 48px;
+            background: linear-gradient(135deg, #E65100, #F57C00);
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .logo-box svg {
+            width: 26px;
+            height: 26px;
+            fill: none;
+            stroke: #FFFFFF;
+            stroke-width: 2;
+        }
+
+        .brand-text h1 {
+            font-size: 20px;
+            font-weight: 800;
+            color: #2D1B12;
+            line-height: 1.1;
+        }
+
+        .brand-text p {
+            font-size: 13px;
+            color: #705B50;
+            margin-top: 2px;
+        }
+
+        .notification-btn {
+            width: 44px;
+            height: 44px;
+            background: rgba(255, 255, 255, 0.45);
+            backdrop-filter: blur(10px);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
+            text-decoration: none;
+        }
+
+        .notification-btn svg {
+            width: 20px;
+            height: 20px;
+            stroke: #E65100;
+            stroke-width: 2;
+            fill: none;
+        }
+
+        /* Main Orange Balance Card */
+        .balance-card {
+            background: linear-gradient(135deg, #E65100 0%, #F57C00 60%, #FB8C00 100%);
+            border-radius: 24px;
+            padding: 24px 20px;
+            color: #FFFFFF;
+            box-shadow: 0 10px 25px rgba(230, 81, 0, 0.25);
+            margin-bottom: 24px;
+        }
+
+        .card-label {
+            font-size: 13px;
+            font-weight: 700;
+            letter-spacing: 0.8px;
+            text-transform: uppercase;
+            opacity: 0.9;
+            margin-bottom: 6px;
+        }
+
+        .main-balance {
+            font-size: 32px;
+            font-weight: 800;
+            margin-bottom: 20px;
+            letter-spacing: -0.5px;
+        }
+
+        .sub-balances {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        .sub-box {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(8px);
+            border-radius: 16px;
+            padding: 12px 14px;
+        }
+
+        .sub-box-label {
+            font-size: 12px;
+            opacity: 0.85;
+            margin-bottom: 4px;
+        }
+
+        .sub-box-val {
+            font-size: 18px;
+            font-weight: 800;
+        }
+
+        .card-actions {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+
+        .btn-action {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 14px;
+            border-radius: 16px;
+            font-size: 15px;
+            font-weight: 700;
+            text-decoration: none;
+            transition: opacity 0.2s;
+        }
+
+        .btn-deposit {
+            background: #EAE3DF;
+            color: #D84315;
+        }
+
+        .btn-withdraw {
+            background: rgba(255, 255, 255, 0.18);
+            color: #FFFFFF;
+            border: 1px solid rgba(255, 255, 255, 0.25);
+        }
+
+        .btn-action svg {
+            width: 18px;
+            height: 18px;
+            stroke-width: 2.5;
+            fill: none;
+        }
+
+        .btn-deposit svg { stroke: #D84315; }
+        .btn-withdraw svg { stroke: #FFFFFF; }
+
+        /* Quick Actions Section */
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 16px;
+        }
+
+        .section-pill {
+            width: 6px;
+            height: 18px;
+            background-color: #E65100;
+            border-radius: 4px;
+        }
+
+        .section-title {
+            font-size: 15px;
+            font-weight: 800;
+            color: #5C4A40;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+        }
+
+        .quick-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 12px;
+        }
+
+        .quick-item {
+            background: rgba(255, 255, 255, 0.45);
+            backdrop-filter: blur(10px);
+            border-radius: 18px;
+            padding: 16px 8px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            color: #2D1B12;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
+            gap: 10px;
+        }
+
+        .quick-item svg {
+            width: 22px;
+            height: 22px;
+            stroke: #E65100;
+            stroke-width: 2;
+            fill: none;
+        }
+
+        .quick-item span {
+            font-size: 12px;
+            font-weight: 700;
+            text-align: center;
+        }
+
+        /* Floating Bottom Nav */
+        .bottom-nav-container {
+            position: fixed;
+            bottom: 16px;
+            left: 16px;
+            right: 16px;
+            display: flex;
+            justify-content: center;
+            z-index: 1000;
+        }
+
+        .bottom-nav {
+            width: 100%;
+            max-width: 420px;
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(20px);
+            border-radius: 35px;
+            padding: 8px 12px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            flex: 1;
+            text-decoration: none;
+            color: #6D584C;
+            font-size: 11px;
+            font-weight: 600;
+            gap: 3px;
+        }
+
+        .nav-item svg {
+            width: 22px;
+            height: 22px;
+            stroke: #6D584C;
+            stroke-width: 2;
+            fill: none;
+        }
+
+        .nav-item.active {
+            background: linear-gradient(135deg, #E65100, #F57C00);
+            color: #FFFFFF;
+            border-radius: 25px;
+            padding: 8px 16px;
+            flex: 1.2;
+            flex-direction: row;
+            gap: 8px;
+        }
+
+        .nav-item.active svg {
+            stroke: #FFFFFF;
+        }
+
+        .nav-item.active span {
+            font-size: 13px;
+            font-weight: 700;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header Section -->
+    <div class="header">
+        <div class="brand-container">
+            <div class="logo-box">
+                <svg viewBox="0 0 24 24"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"></path></svg>
+            </div>
+            <div class="brand-text">
+                <h1>FinEdge</h1>
+                <p>Automatic daily income every 24h</p>
+            </div>
+        </div>
+        <a href="#" class="notification-btn">
+            <svg viewBox="0 0 24 24"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path><path d="M13.73 21a2 2 0 0 1-3.46 0"></path></svg>
+        </a>
+    </div>
+
+    <!-- Main Balance Card -->
+    <div class="balance-card">
+        <div class="card-label">Account Balance</div>
+        <div class="main-balance">UGX 5,000</div>
+        
+        <div class="sub-balances">
+            <div class="sub-box">
+                <div class="sub-box-label">Deposit balance</div>
+                <div class="sub-box-val">UGX 0</div>
+            </div>
+            <div class="sub-box">
+                <div class="sub-box-label">Total earned</div>
+                <div class="sub-box-val">UGX 0</div>
+            </div>
+        </div>
+
+        <div class="card-actions">
+            <a href="#" class="btn-action btn-deposit">
+                <svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"></line><polyline points="19 12 12 19 5 12"></polyline></svg>
+                Deposit
+            </a>
+            <a href="#" class="btn-action btn-withdraw">
+                <svg viewBox="0 0 24 24"><line x1="12" y1="19" x2="12" y2="5"></line><polyline points="5 12 12 5 19 12"></polyline></svg>
+                Withdraw
+            </a>
+        </div>
+    </div>
+
+    <!-- Quick Actions Grid -->
+    <div class="section-header">
+        <div class="section-pill"></div>
+        <div class="section-title">Quick Actions</div>
+    </div>
+
+    <div class="quick-grid">
+        <a href="#" class="quick-item">
+            <svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"></line><polyline points="19 12 12 19 5 12"></polyline></svg>
+            <span>Deposit</span>
+        </a>
+        <a href="#" class="quick-item">
+            <svg viewBox="0 0 24 24"><line x1="12" y1="19" x2="12" y2="5"></line><polyline points="5 12 12 5 19 12"></polyline></svg>
+            <span>Withdraw</span>
+        </a>
+        <a href="#" class="quick-item">
+            <svg viewBox="0 0 24 24"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path></svg>
+            <span>My Plans</span>
+        </a>
+        <a href="#" class="quick-item">
+            <svg viewBox="0 0 24 24"><path d="M20 12v10H4V12"></path><path d="M2 7h20v5H2z"></path><path d="M12 22V7"></path></svg>
+            <span>Invite</span>
+        </a>
+
+        <a href="#" class="quick-item">
+            <svg viewBox="0 0 24 24"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline><polyline points="17 6 23 6 23 12"></polyline></svg>
+            <span>Income</span>
+        </a>
+        <a href="#" class="quick-item">
+            <svg viewBox="0 0 24 24"><rect x="2" y="6" width="20" height="12" rx="2"></rect><path d="M12 12h.01"></path></svg>
+            <span>Deposits</span>
+        </a>
+        <a href="#" class="quick-item">
+            <svg viewBox="0 0 24 24"><line x1="12" y1="19" x2="12" y2="5"></line><polyline points="5 12 12 5 19 12"></polyline></svg>
+            <span>Payouts</span>
+        </a>
+        <a href="#" class="quick-item">
+            <svg viewBox="0 0 24 24"><path d="M3 18v-6a9 9 0 0 1 18 0v6"></path><path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"></path></svg>
+            <span>Support</span>
+        </a>
+    </div>
+
+    <!-- Floating Navigation Bar -->
+    <div class="bottom-nav-container">
+        <div class="bottom-nav">
+            <a href="#" class="nav-item active">
+                <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path></svg>
+                <span>Home</span>
+            </a>
+            <a href="#" class="nav-item">
+                <svg viewBox="0 0 24 24"><polygon points="12 2 2 7 12 12 22 7 12 2"></polygon><polyline points="2 17 12 22 22 17"></polyline><polyline points="2 12 12 17 22 12"></polyline></svg>
+                <span>Plans</span>
+            </a>
+            <a href="#" class="nav-item">
+                <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+                <span>Team</span>
+            </a>
+            <a href="#" class="nav-item">
+                <svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+                <span>Profile</span>
+            </a>
+        </div>
+    </div>
+
+</body>
+</html><!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile Settings</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(180deg, #EAD7CD 0%, #D8B29C 50%, #CA9980 100%);
+            background-attachment: fixed;
+            min-height: 100vh;
+            padding: 20px 16px 100px 16px;
+            color: #332319;
+        }
+
+        .header {
+            margin-top: 10px;
+            margin-bottom: 20px;
+        }
+
+        .header h1 {
+            font-size: 24px;
+            font-weight: 800;
+            color: #332319;
+        }
+
+        .header p {
+            font-size: 14px;
+            color: #705B50;
+            margin-top: 4px;
+        }
+
+        /* Top Profile Card */
+        .profile-card {
+            background: rgba(255, 255, 255, 0.45);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
+            margin-bottom: 16px;
+        }
+
+        .avatar-box {
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(135deg, #E65100, #F57C00);
+            border-radius: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .avatar-box svg {
+            width: 38px;
+            height: 38px;
+            fill: none;
+            stroke: #FFFFFF;
+            stroke-width: 2;
+        }
+
+        .profile-info .phone {
+            font-size: 20px;
+            font-weight: 800;
+            color: #2D1B12;
+            word-break: break-all;
+        }
+
+        .profile-info .user-id {
+            font-size: 14px;
+            font-weight: 700;
+            color: #E65100;
+            margin-top: 6px;
+        }
+
+        /* Stats Row */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            margin-bottom: 28px;
+        }
+
+        .stat-card {
+            background: rgba(255, 255, 255, 0.45);
+            backdrop-filter: blur(10px);
+            border-radius: 16px;
+            padding: 14px 8px;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
+        }
+
+        .stat-amount {
+            font-size: 15px;
+            font-weight: 800;
+            margin-bottom: 4px;
+        }
+
+        .stat-amount.orange { color: #D84315; }
+        .stat-amount.green { color: #2E7D32; }
+
+        .stat-label {
+            font-size: 12px;
+            color: #6D584C;
+            font-weight: 500;
+        }
+
+        /* Section Title */
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 16px;
+        }
+
+        .section-pill {
+            width: 6px;
+            height: 18px;
+            background-color: #E65100;
+            border-radius: 4px;
+        }
+
+        .section-title {
+            font-size: 15px;
+            font-weight: 800;
+            color: #5C4A40;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+        }
+
+        /* Settings Options */
+        .settings-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .option-item {
+            background: rgba(255, 255, 255, 0.45);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 18px 16px;
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            color: inherit;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
+        }
+
+        .option-icon {
+            width: 24px;
+            height: 24px;
+            stroke: #E65100;
+            stroke-width: 2;
+            fill: none;
+            margin-right: 16px;
+            flex-shrink: 0;
+        }
+
+        .option-content {
+            flex-grow: 1;
+        }
+
+        .option-title {
+            font-size: 16px;
+            font-weight: 700;
+            color: #2D1B12;
+            margin-bottom: 2px;
+        }
+
+        .option-sub {
+            font-size: 13px;
+            color: #78655A;
+        }
+
+        .option-arrow {
+            width: 18px;
+            height: 18px;
+            stroke: #78655A;
+            stroke-width: 2.5;
+            fill: none;
+            flex-shrink: 0;
+        }
+
+        /* Floating Bottom Nav */
+        .bottom-nav-container {
+            position: fixed;
+            bottom: 16px;
+            left: 16px;
+            right: 16px;
+            display: flex;
+            justify-content: center;
+            z-index: 1000;
+        }
+
+        .bottom-nav {
+            width: 100%;
+            max-width: 420px;
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(20px);
+            border-radius: 35px;
+            padding: 8px 12px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            flex: 1;
+            text-decoration: none;
+            color: #6D584C;
+            font-size: 11px;
+            font-weight: 600;
+            gap: 3px;
+        }
+
+        .nav-item svg {
+            width: 22px;
+            height: 22px;
+            stroke: #6D584C;
+            stroke-width: 2;
+            fill: none;
+        }
+
+        .nav-item.active {
+            background: linear-gradient(135deg, #E65100, #F57C00);
+            color: #FFFFFF;
+            border-radius: 25px;
+            padding: 8px 16px;
+            flex: 1.2;
+            flex-direction: row;
+            gap: 8px;
+        }
+
+        .nav-item.active svg {
+            stroke: #FFFFFF;
+        }
+
+        .nav-item.active span {
+            font-size: 13px;
+            font-weight: 700;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        <h1>Profile</h1>
+        <p>Manage your account</p>
+    </div>
+
+    <!-- User Profile Card -->
+    <div class="profile-card">
+        <div class="avatar-box">
+            <svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+        </div>
+        <div class="profile-info">
+            <div class="phone">256746685245</div>
+            <div class="user-id">ID: 14344</div>
+        </div>
+    </div>
+
+    <!-- Balance Row -->
+    <div class="stats-grid">
+        <div class="stat-card">
+            <div class="stat-amount orange">UGX 5,000</div>
+            <div class="stat-label">Balance</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-amount green">UGX 0</div>
+            <div class="stat-label">Deposit</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-amount orange">UGX 0</div>
+            <div class="stat-label">Referral</div>
+        </div>
+    </div>
+
+    <!-- Settings Title -->
+    <div class="section-header">
+        <div class="section-pill"></div>
+        <div class="section-title">Account Settings</div>
+    </div>
+
+    <!-- Settings List -->
+    <div class="settings-list">
+        
+        <a href="#" class="option-item">
+            <svg class="option-icon" viewBox="0 0 24 24"><path d="M20 12v10H4V12"></path><path d="M2 7h20v5H2z"></path><path d="M12 22V7"></path><path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z"></path><path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"></path></svg>
+            <div class="option-content">
+                <div class="option-title">Bonus Exchange</div>
+                <div class="option-sub">Convert your bonus to balance</div>
+            </div>
+            <svg class="option-arrow" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"></polyline></svg>
+        </a>
+
+        <a href="#" class="option-item">
+            <svg class="option-icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+            <div class="option-content">
+                <div class="option-title">Account Record</div>
+                <div class="option-sub">View all transaction history</div>
+            </div>
+            <svg class="option-arrow" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"></polyline></svg>
+        </a>
+
+        <a href="#" class="option-item">
+            <svg class="option-icon" viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path></svg>
+            <div class="option-content">
+                <div class="option-title">Bind Account</div>
+                <div class="option-sub">Manage your withdraw details</div>
+            </div>
+            <svg class="option-arrow" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"></polyline></svg>
+        </a>
+
+        <a href="#" class="option-item">
+            <svg class="option-icon" viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 0 1-8 0"></path></svg>
+            <div class="option-content">
+                <div class="option-title">My Orders</div>
+                <div class="option-sub">View your investment plans</div>
+            </div>
+            <svg class="option-arrow" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"></polyline></svg>
+        </a>
+
+        <a href="#" class="option-item">
+            <svg class="option-icon" viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+            <div class="option-content">
+                <div class="option-title">Change Password</div>
+                <div class="option-sub">Update your security password</div>
+            </div>
+            <svg class="option-arrow" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"></polyline></svg>
+        </a>
+
+        <a href="#" class="option-item">
+            <svg class="option-icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+            <div class="option-content">
+                <div class="option-title">Withdraw History</div>
+                <div class="option-sub">Past withdrawals</div>
+            </div>
+            <svg class="option-arrow" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"></polyline></svg>
+        </a>
+
+        <a href="#" class="option-item">
+            <svg class="option-icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+            <div class="option-content">
+                <div class="option-title">Deposit History</div>
+                <div class="option-sub">Past deposits</div>
+            </div>
+            <svg class="option-arrow" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"></polyline></svg>
+        </a>
+
+        <a href="#" class="option-item">
+            <svg class="option-icon" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+            <div class="option-content">
+                <div class="option-title">Customer Service</div>
+                <div class="option-sub">Get support</div>
+            </div>
+            <svg class="option-arrow" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"></polyline></svg>
+        </a>
+
+    </div>
+
+    <!-- Fixed Bottom Bar -->
+    <div class="bottom-nav-container">
+        <div class="bottom-nav">
+            <a href="#" class="nav-item">
+                <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path></svg>
+                <span>Home</span>
+            </a>
+            <a href="#" class="nav-item">
+                <svg viewBox="0 0 24 24"><polygon points="12 2 2 7 12 12 22 7 12 2"></polygon><polyline points="2 17 12 22 22 17"></polyline><polyline points="2 12 12 17 22 12"></polyline></svg>
+                <span>Plans</span>
+            </a>
+            <a href="#" class="nav-item">
+                <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+                <span>Team</span>
+            </a>
+            <a href="#" class="nav-item active">
+                <svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+                <span>Profile</span>
+            </a>
+        </div>
+    </div>
+
+</body>
+</html>

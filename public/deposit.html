@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Deposit Page</title>
+    <style>
+        :root {
+            --primary-orange-start: #FF5500;
+            --primary-orange-end: #FFA000;
+            --bg-gradient: linear-gradient(180deg, #FFF0E6 0%, #FFFFFF 100%);
+            --text-dark: #1F1F1F;
+            --text-muted: #757575;
+            --card-border: #E8E8E8;
+            --card-selected-border: #FF6A00;
+            --btn-quick-bg: #FFEAD8;
+            --btn-quick-text: #E65100;
+            --badge-green-bg: #E8F8EE;
+            --badge-green-text: #2E7D32;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            background-color: #F4F5F7;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .phone-container {
+            width: 100%;
+            max-width: 410px;
+            background: var(--bg-gradient);
+            border-radius: 28px;
+            padding: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+        }
+
+        /* Top Bar Header */
+        .top-nav {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+
+        .back-btn {
+            background-color: #FFEAD8;
+            border: none;
+            width: 42px;
+            height: 42px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+        .back-btn svg {
+            width: 20px;
+            height: 20px;
+            fill: #E65100;
+        }
+
+        .page-title {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-left: -60px;
+        }
+
+        .status-badge {
+            background-color: var(--badge-green-bg);
+            color: var(--badge-green-text);
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        /* Gradient Balance Card */
+        .balance-card {
+            background: linear-gradient(135deg, var(--primary-orange-start), var(--primary-orange-end));
+            border-radius: 20px;
+            padding: 24px;
+            color: white;
+            text-align: center;
+            margin-bottom: 20px;
+            box-shadow: 0 8px 20px rgba(255, 85, 0, 0.25);
+        }
+
+        .balance-label {
+            font-size: 14px;
+            opacity: 0.9;
+            margin-bottom: 6px;
+        }
+
+        .balance-amount {
+            font-size: 32px;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+            margin-bottom: 12px;
+        }
+
+        .sub-balance {
+            font-size: 12px;
+            opacity: 0.85;
+        }
+
+        /* Main Form Card Wrapper */
+        .form-card {
+            background: #FFFFFF;
+            border-radius: 24px;
+            padding: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+            margin-bottom: 16px;
+        }
+
+        .field-label {
+            font-size: 15px;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 12px;
+            display: block;
+        }
+
+        .text-input {
+            width: 100%;
+            padding: 16px;
+            border: 1px solid var(--card-border);
+            border-radius: 14px;
+            font-size: 16px;
+            color: var(--text-dark);
+            outline: none;
+            background-color: #FAFAFA;
+        }
+
+        .text-input:focus {
+            border-color: var(--card-selected-border);
+            background-color: #FFFFFF;
+        }
+
+        .section-spacing {
+            margin-top: 20px;
+        }
+
+        /* Quick Amount Grid */
+        .amount-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+        }
+
+        .amount-btn {
+            background-color: var(--btn-quick-bg);
+            color: var(--btn-quick-text);
+            border: none;
+            padding: 14px 8px;
+            border-radius: 12px;
+            font-weight: 700;
+            font-size: 14px;
+            cursor: pointer;
+            transition: transform 0.1s ease;
+        }
+
+        .amount-btn:active {
+            transform: scale(0.97);
+        }
+
+        /* Network Provider Grid */
+        .network-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+
+        .network-option {
+            border: 1px solid var(--card-border);
+            border-radius: 16px;
+            padding: 14px;
+            cursor: pointer;
+            background-color: #FFFFFF;
+            position: relative;
+        }
+
+        .network-option.selected {
+            border: 2px solid var(--card-selected-border);
+            background-color: #FFF9F5;
+        }
+
+        .network-header {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 6px;
+        }
+
+        .network-icon {
+            width: 20px;
+            height: 20px;
+            border: 2px solid #E65100;
+            border-radius: 4px;
+            display: inline-block;
+            position: relative;
+        }
+        
+        .network-icon::after {
+            content: '';
+            position: absolute;
+            bottom: 2px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 4px;
+            height: 4px;
+            background-color: #E65100;
+            border-radius: 50%;
+        }
+
+        .network-name {
+            font-size: 15px;
+            font-weight: 700;
+            color: var(--text-dark);
+        }
+
+        .network-prefixes {
+            font-size: 12px;
+            color: var(--text-muted);
+        }
+
+        .helper-text {
+            font-size: 13px;
+            color: var(--text-muted);
+            margin-top: 8px;
+            line-height: 1.4;
+        }
+
+        /* Banner Card */
+        .info-banner {
+            background: #FFFFFF;
+            border-radius: 18px;
+            padding: 16px;
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.02);
+        }
+
+        .banner-icon {
+            color: #2E7D32;
+            font-size: 18px;
+            margin-top: 1px;
+        }
+
+        .banner-title {
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 2px;
+        }
+
+        .banner-subtitle {
+            font-size: 12px;
+            color: var(--text-muted);
+        }
+
+        /* Action Button */
+        .submit-btn {
+            width: 100%;
+            background: linear-gradient(135deg, var(--primary-orange-start), var(--primary-orange-end));
+            color: white;
+            border: none;
+            padding: 18px;
+            border-radius: 16px;
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            box-shadow: 0 6px 18px rgba(255, 85, 0, 0.3);
+        }
+    </style>
+</head>
+<body>
+
+<div class="phone-container">
+    <!-- Header -->
+    <div class="top-nav">
+        <a href="index.html" class="back-btn">
+            <svg viewBox="0 0 24 24"><path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/></svg>
+        </a>
+        <span class="page-title">Deposit</span>
+        <div class="status-badge">⚡ Instant</div>
+    </div>
+
+    <!-- Balance Banner -->
+    <div class="balance-card">
+        <div class="balance-label">Deposit Balance</div>
+        <div class="balance-amount">UGX 0</div>
+        <div class="sub-balance">Account balance: UGX 5,000</div>
+    </div>
+
+    <!-- Main Container -->
+    <div class="form-card">
+        <!-- Amount Input Field -->
+        <label class="field-label">Amount</label>
+        <input type="text" class="text-input" placeholder="Enter deposit amount">
+
+        <!-- Quick Amount Selection -->
+        <div class="section-spacing">
+            <label class="field-label">Quick amount</label>
+            <div class="amount-grid">
+                <button class="amount-btn">20,000</button>
+                <button class="amount-btn">50,000</button>
+                <button class="amount-btn">100,000</button>
+                <button class="amount-btn">200,000</button>
+                <button class="amount-btn">500,000</button>
+                <button class="amount-btn">1,000,000</button>
+            </div>
+        </div>
+
+        <!-- Mobile Money Network Selection -->
+        <div class="section-spacing">
+            <label class="field-label">Mobile money network</label>
+            <div class="network-grid">
+                <div class="network-option selected">
+                    <div class="network-header">
+                        <span class="network-icon"></span>
+                        <span class="network-name">MTN MoMo</span>
+                    </div>
+                    <div class="network-prefixes">077 / 078 / 076</div>
+                </div>
+                <div class="network-option">
+                    <div class="network-header">
+                        <span class="network-icon" style="border-color:#D32F2F;"></span>
+                        <span class="network-name">Airtel Money</span>
+                    </div>
+                    <div class="network-prefixes">070 / 075 / 074</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Money Number Input -->
+        <div class="section-spacing">
+            <label class="field-label">Mobile money number</label>
+            <input type="text" class="text-input" value="256746685245">
+            <p class="helper-text">You'll get a payment prompt on this number — enter your PIN to approve.</p>
+        </div>
+    </div>
+
+    <!-- Confirmation Banner -->
+    <div class="info-banner">
+        <span class="banner-icon">🛡️</span>
+        <div>
+            <div class="banner-title">Deposits are confirmed automatically</div>
+            <div class="banner-subtitle">Min UGX 20,000 · Max UGX 10,000,000</div>
+        </div>
+    </div>
+
+    <!-- Payment CTA Button -->
+    <button class="submit-btn">Send Payment Prompt</button>
+</div>
+
+</body>
+</html>
